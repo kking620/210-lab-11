@@ -61,8 +61,15 @@ void inputBowlingScore(bowlingScore * bptr)
     cout << "Local bowling alley name: ";
     getline(cin, bptr->localBowlingAlley);
 
-    
-
+    bptr -> pinsKnockedDown = new int[NR_ROUNDS];
+    for (int i = 0; i < NR_ROUNDS; i++)
+    {
+        cout << "Pins Knocked Down In Round #" << i + 1 << ": ";
+        cin >> bptr->pinsKnockedDown[i];
+    }
+    cin.ignore();
+    cout << endl << endl;
+    nrBowlers++;
 }
 
 void displayBowlingScore(bowlingScore * bptr)
