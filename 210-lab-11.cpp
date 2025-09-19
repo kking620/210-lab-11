@@ -8,6 +8,7 @@ struct bowlingScore
 {
     string name;
     string localBowlingAlley;
+    int nRoundsPlayed;
     int  *pinsKnockedDown;
 
     ~bowlingScore()
@@ -63,7 +64,12 @@ void inputBowlingScore(bowlingScore * bptr)
     getline(cin, bptr->localBowlingAlley);
 
     bptr -> pinsKnockedDown = new int[NR_ROUNDS];
-    for (int i = 0; i < NR_ROUNDS; i++)
+    
+    cout << "How many rounds did they play?\n";
+    cin >> bptr->nRoundsPlayed;
+    cin.ignore();
+
+    for (int i = 0; i < bptr->nRoundsPlayed; i++)
     {
         cout << "Pins Knocked Down In Round #" << i + 1 << ": ";
         cin >> bptr->pinsKnockedDown[i];
@@ -79,7 +85,7 @@ void displayBowlingScore(bowlingScore * bptr)
     cout << "Bowler summary:\n";
     cout << "Name: " << bptr->name << endl;
     cout << "Local Bowling Alley: " << bptr->localBowlingAlley << endl;
-    for (int i = 0; i < NR_ROUNDS; i++)
+    for (int i = 0; i < bptr->nRoundsPlayed; i++)
         cout << "Round #" << i + 1 << ": " << bptr->pinsKnockedDown[i] << endl;
 
     cout << endl << endl;
