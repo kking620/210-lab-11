@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-const int NR_ROUNDS = 5;
+const int NR_ROUNDS = 5, NR_BOWLERS = 100;
 
 struct bowlingScore
 {
@@ -25,7 +25,6 @@ void displayBowlingScore(bowlingScore *);
 int main()
 {
     bowlingScore *bowlingHistory = new bowlingScore[NR_ROUNDS];
-    int nrBowlers = 0;
     char answer;
 
     while (answer != 'n' || answer != 'N')
@@ -35,18 +34,21 @@ int main()
 
         if (answer == 'y' || answer == 'Y')
         {
-            int i = 0;
-
-            inputBowlingScore(&bowlingHistory[i]);
-            displayBowlingScore(&bowlingHistory[i]);
-
-            nrBowlers++;
-            i++;
+            for (int i = 0; i < NR_BOWLERS; i++)
+            {
+                inputBowlingScore(&bowlingHistory[i]);
+            }
         }
         else if (answer != 'n' || answer != 'N') break;
         else if (answer != 'n' || answer != 'N' || answer != 'y' || answer != 'Y')
             cout << "Invalid input, please try again\n";
     }
+
+    for (int i = 0; i < NR_BOWLERS; i++)
+    {
+        displayBowlingScore(&bowlingHistory[i]);
+    }
+
     return 0;
 }
 
@@ -69,10 +71,17 @@ void inputBowlingScore(bowlingScore * bptr)
     }
     cin.ignore();
     cout << endl << endl;
+
     nrBowlers++;
 }
 
 void displayBowlingScore(bowlingScore * bptr)
 {
+    cout << "Bowler summary:\n";
+    cout << "Name: " << bptr->name << endl;
+    cout << "ID: " << bptr->localBowlingAlley << endl;
+    for (int i = 0; i < NR_ROUNDS; i++)
+        cout << "Round #" << i + 1 << ": " << bptr->pinsKnockedDown[i] << endl;
 
+    cout << endl << endl;
 }
