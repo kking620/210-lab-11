@@ -8,7 +8,7 @@ struct bowlingScore
 {
     string name;
     string localBowlingAlley;
-    int  * pinsKnockedDown;
+    int  *pinsKnockedDown;
 
     ~bowlingScore()
     {
@@ -20,11 +20,11 @@ struct bowlingScore
 };
 
 void inputBowlingScore(bowlingScore *);
-void displayBowlingScore(bowlingScore *, int size);
+void displayBowlingScore(bowlingScore *);
 
 int main()
 {
-    bowlingScore *bowlingHistory = new bowlingScore[NR_ROUNDS];
+    bowlingScore *bowlingHistory = new bowlingScore[NR_BOWLERS];
     char answer;
     int size = 0;
 
@@ -32,18 +32,19 @@ int main()
     {
         cout << "Would you like to input bowler information?\n";
         cin >> answer;
-
+        
         if (answer == 'y' || answer == 'Y')
         {
             inputBowlingScore(&bowlingHistory[i]);
             size++;
         }
         else if (answer != 'n' || answer != 'N') break;
-        else if (answer != 'n' || answer != 'N' || answer != 'y' || answer != 'Y')inputBowlingScore(&bowlingHistory[i]);
+        else if (answer != 'n' && answer != 'N' && answer != 'y' && answer != 'Y')
+            cout << "Invalid input, please try again\n";
     }
 
-    for (int i = 0; i < NR_BOWLERS; i++)
-        displayBowlingScore(&bowlingHistory[i], size);
+    for (int i = 0; i < size; i++)
+        displayBowlingScore(&bowlingHistory[i]);
 
     return 0;
 }
@@ -72,16 +73,13 @@ void inputBowlingScore(bowlingScore * bptr)
     nrBowlers++;
 }
 
-void displayBowlingScore(bowlingScore * bptr, int size)
+void displayBowlingScore(bowlingScore * bptr)
 {
     cout << "Bowler summary:\n";
-    for (int i = 0; i < size; i++)
-    {
-        cout << "Name: " << bptr->name << endl;
-        cout << "ID: " << bptr->localBowlingAlley << endl;
-        for (int i = 0; i < NR_ROUNDS; i++)
-            cout << "Round #" << i + 1 << ": " << bptr->pinsKnockedDown[i] << endl;
+    cout << "Name: " << bptr->name << endl;
+    cout << "Local Bowling Alley: " << bptr->localBowlingAlley << endl;
+    for (int i = 0; i < NR_ROUNDS; i++)
+        cout << "Round #" << i + 1 << ": " << bptr->pinsKnockedDown[i] << endl;
 
-        cout << endl << endl;
-    }
+    cout << endl << endl;
 }
