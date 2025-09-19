@@ -25,23 +25,12 @@ void displayBowlingScore(bowlingScore *);
 int main()
 {
     bowlingScore *bowlingHistory = new bowlingScore[NR_ROUNDS];
+
     char answer;
 
-    while (answer != 'n' || answer != 'N')
+    for (int i = 0; i < NR_BOWLERS; i++)
     {
-        cout << "Would you like to input bowler information?\n";
-        cin >> answer;
-
-        if (answer == 'y' || answer == 'Y')
-        {
-            for (int i = 0; i < NR_BOWLERS; i++)
-            {
-                inputBowlingScore(&bowlingHistory[i]);
-            }
-        }
-        else if (answer != 'n' || answer != 'N') break;
-        else if (answer != 'n' || answer != 'N' || answer != 'y' || answer != 'Y')
-            cout << "Invalid input, please try again\n";
+        inputBowlingScore(&bowlingHistory[i]);
     }
 
     for (int i = 0; i < NR_BOWLERS; i++)
@@ -57,6 +46,7 @@ void inputBowlingScore(bowlingScore * bptr)
     static int nrBowlers = 1;
 
     cout << "Input data for bowler #" << nrBowlers << ":\n";
+
     cout << "Name: ";
     getline(cin, bptr->name);
 
