@@ -32,6 +32,7 @@ int main()
     {
         cout << "Would you like to input bowler information?\n";
         cin >> answer;
+        cin.ignore();
         
         if (answer == 'y' || answer == 'Y')
         {
